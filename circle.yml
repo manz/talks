@@ -20,7 +20,7 @@ test:
    override:
      - true
 
-deploy:
+deployment:
   master:
     branch: master
     commands:
