@@ -1,0 +1,28 @@
+machine:
+  environment:
+    # Add app engine sdk to pythonpath for local unit tests.
+    PYTHONPATH: ${PYTHONPATH}:${HOME}/google_appengine
+    # Replace this with your project ID
+    GCLOUD_PROJECT: "talks-1369"
+
+dependencies:
+  pre:
+    # Download App Engine SDK
+    # This is not necessary to deploy, its only necessary  to run local tests importing the App Engine SDK
+    - curl -o $HOME/google_appengine_1.9.30.zip https://storage.googleapis.com/appengine-sdks/featured/google_appengine_1.9.30.zip
+    - unzip -q -d $HOME $HOME/google_appengine_1.9.30.zip
+    # Retrieve our secrets from the CircleCI environment
+    - echo $CLIENT_SECRET | base64 --decode > ${HOME}/client-secret.json
+    # get present
+    - go get golang.org/x/tools/cmd/present
+
+test:
+   override:
+     - true
+
+deploy:
+  master:
+    branch: master
+    commands:
+      - cp -R ${GOPATH}/src/golang.org/x/tools/cmd/present .
+      - gcloud -q preview app deploy app.yaml --promote --version=1
