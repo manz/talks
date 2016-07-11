@@ -17,8 +17,8 @@ dependencies:
     - go get golang.org/x/tools/cmd/present
 
 test:
-   override:
-     - true
+  override:
+    - true
 
 deployment:
   master:
