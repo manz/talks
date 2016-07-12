@@ -3,7 +3,7 @@ machine:
     # Add app engine sdk to pythonpath for local unit tests.
     PYTHONPATH: ${PYTHONPATH}:${HOME}/google_appengine
     # Replace this with your project ID
-    GCLOUD_PROJECT: "talks-1369"
+    CLOUDSDK_CORE_PROJECT: "talks-1369"
 
 dependencies:
   pre:
@@ -25,4 +25,5 @@ deployment:
     branch: master
     commands:
       - cp -R /home/ubuntu/.go_workspace/src/golang.org/x/tools/cmd/present .
+      - gcloud auth activate-service-account --key ~/client-secret.json
       - gcloud -q preview app deploy app.yaml --promote --version=1
