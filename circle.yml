@@ -24,6 +24,6 @@ deployment:
   master:
     branch: master
     commands:
-      - cp -R /home/ubuntu/.go_workspace/src/golang.org/x/tools/cmd/present .
+      - cp -R /home/ubuntu/.go_workspace/src/golang.org/x/tools/cmd/present present
       - gcloud auth activate-service-account --key ~/client-secret.json
       - gcloud -q preview app deploy app.yaml --promote --version=1

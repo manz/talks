@@ -1,5 +1,4 @@
-application: 
-version: talks-test
+application:
 runtime: go
 api_version: go1
 
