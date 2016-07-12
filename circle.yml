@@ -17,6 +17,8 @@ dependencies:
     - echo $CLIENT_SECRET | base64 --decode > ${HOME}/client-secret.json
     # get present
     - go get golang.org/x/tools/cmd/present
+    - go get google.golang.org/appengine/cmd/aedeploy
+
 
 test:
   override:
@@ -28,4 +30,4 @@ deployment:
     commands:
       - cp -R /home/ubuntu/.go_workspace/src/golang.org/x/tools/cmd/present present
       - gcloud auth activate-service-account --key ~/client-secret.json
-      - gcloud -q preview app deploy app.yaml --promote --version=1
+      - aedeploy gcloud app deploy app.yaml --promote --version=1
